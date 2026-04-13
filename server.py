@@ -6,6 +6,10 @@ from config import config
 from tools.context.code_indexer import index_project, get_symbol_info
 from tools.context.dependency_graph import get_dependency_graph
 from tools.context.project_stats import get_project_stats
+from tools.knowledge.doc_search import search_docs
+from tools.knowledge.package_info import get_package_info
+from tools.knowledge.code_search import search_code_examples
+from tools.knowledge.compatibility import check_compatibility
 
 mcp = FastMCP(
     name="ai-coding",
@@ -42,6 +46,26 @@ async def tool_get_dependency_graph(root_path: str, file_path: str) -> dict:
 async def tool_get_project_stats(root_path: str) -> dict:
     """Get project statistics."""
     return await get_project_stats(root_path)
+
+@mcp.tool()
+async def tool_search_docs(query: str, library: str = None, version: str = None) -> dict:
+    """Search documentation."""
+    return await search_docs(query, library, version)
+
+@mcp.tool()
+async def tool_get_package_info(package_name: str, ecosystem: str) -> dict:
+    """Get package information."""
+    return await get_package_info(package_name, ecosystem)
+
+@mcp.tool()
+async def tool_search_code_examples(query: str, language: str) -> dict:
+    """Search code examples."""
+    return await search_code_examples(query, language)
+
+@mcp.tool()
+async def tool_check_compatibility(project_path: str) -> dict:
+    """Check dependency compatibility."""
+    return await check_compatibility(project_path)
 
 async def main():
     print(f"AI Coding MCP v2 starting...")
