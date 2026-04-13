@@ -10,6 +10,8 @@ from tools.knowledge.doc_search import search_docs
 from tools.knowledge.package_info import get_package_info
 from tools.knowledge.code_search import search_code_examples
 from tools.knowledge.compatibility import check_compatibility
+from tools.workflow.git_ops import git_status, git_history, git_branch_analysis
+from tools.workflow.ci_github import ci_status, issue_list, pr_summary
 
 mcp = FastMCP(
     name="ai-coding",
@@ -66,6 +68,36 @@ async def tool_search_code_examples(query: str, language: str) -> dict:
 async def tool_check_compatibility(project_path: str) -> dict:
     """Check dependency compatibility."""
     return await check_compatibility(project_path)
+
+@mcp.tool()
+async def tool_git_status(repo_path: str) -> dict:
+    """Get git status."""
+    return await git_status(repo_path)
+
+@mcp.tool()
+async def tool_git_history(repo_path: str, file_path: str = None, author: str = None, since: str = None) -> dict:
+    """Get git history."""
+    return await git_history(repo_path, file_path, author, since)
+
+@mcp.tool()
+async def tool_git_branch_analysis(repo_path: str) -> dict:
+    """Analyze git branches."""
+    return await git_branch_analysis(repo_path)
+
+@mcp.tool()
+async def tool_ci_status(repo_path: str = None, repo_url: str = None) -> dict:
+    """Get CI status."""
+    return await ci_status(repo_path, repo_url)
+
+@mcp.tool()
+async def tool_issue_list(repo_url: str, state: str = "open", labels: str = None) -> dict:
+    """List issues."""
+    return await issue_list(repo_url, state, labels)
+
+@mcp.tool()
+async def tool_pr_summary(repo_url: str, pr_number: int = None) -> dict:
+    """Get PR summary."""
+    return await pr_summary(repo_url, pr_number)
 
 async def main():
     print(f"AI Coding MCP v2 starting...")
