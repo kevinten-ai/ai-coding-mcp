@@ -12,6 +12,9 @@ from tools.knowledge.code_search import search_code_examples
 from tools.knowledge.compatibility import check_compatibility
 from tools.workflow.git_ops import git_status, git_history, git_branch_analysis
 from tools.workflow.ci_github import ci_status, issue_list, pr_summary
+from tools.specs.spec_manager import list_specs, get_spec, search_specs, create_spec
+from tools.specs.scaffold import scaffold_project
+from tools.specs.validator import validate_structure
 
 mcp = FastMCP(
     name="ai-coding",
@@ -98,6 +101,36 @@ async def tool_issue_list(repo_url: str, state: str = "open", labels: str = None
 async def tool_pr_summary(repo_url: str, pr_number: int = None) -> dict:
     """Get PR summary."""
     return await pr_summary(repo_url, pr_number)
+
+@mcp.tool()
+async def tool_list_specs(project_path: str, type: str = None) -> dict:
+    """List spec files."""
+    return await list_specs(project_path, type)
+
+@mcp.tool()
+async def tool_get_spec(project_path: str, spec_path: str) -> dict:
+    """Get spec file content."""
+    return await get_spec(project_path, spec_path)
+
+@mcp.tool()
+async def tool_search_specs(project_path: str, query: str) -> dict:
+    """Search specs."""
+    return await search_specs(project_path, query)
+
+@mcp.tool()
+async def tool_create_spec(project_path: str, type: str, name: str) -> dict:
+    """Create new spec file."""
+    return await create_spec(project_path, type, name)
+
+@mcp.tool()
+async def tool_scaffold_project(template: str, target_path: str, params: dict) -> dict:
+    """Scaffold new project from template."""
+    return await scaffold_project(template, target_path, params)
+
+@mcp.tool()
+async def tool_validate_structure(project_path: str, template: str = None) -> dict:
+    """Validate project structure."""
+    return await validate_structure(project_path, template)
 
 async def main():
     print(f"AI Coding MCP v2 starting...")
