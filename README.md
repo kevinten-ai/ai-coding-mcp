@@ -2,6 +2,8 @@
 
 Lightweight MCP server for AI IDEs (Claude Code, Cursor, etc.). Provides 21 tools across 4 modules without LLM wrapping.
 
+![Architecture Overview](docs/images/architecture.png)
+
 ## Quick Start
 
 ```bash
@@ -40,6 +42,8 @@ python server.py
 - `validate_structure` - Validate directory structure (stub)
 
 ## Architecture
+
+![Data Flow](docs/images/data-flow.png)
 
 - **CLI-first**: All external calls via `git`, `gh`, `pip`, `npm`, `curl`
 - **Zero LLM wrapping**: Return structured data, let AI IDE analyze
