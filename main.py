@@ -280,7 +280,8 @@ class CodingAssistantServer:
             # 初始化
             await self.initialize()
 
-            print("🚀 AI编程助手MCP服务器启动中..."            print(f"📍 服务器地址: {config.server.host}:{config.server.port}")
+            print("🚀 AI编程助手MCP服务器启动中...")
+            print(f"📍 服务器地址: {config.server.host}:{config.server.port}")
             print(f"🤖 AI模型: {config.ai.model}")
             print(f"🛠️  已加载工具: {len(self.tools)}")
             print("📝 服务器已就绪，等待连接...")
@@ -368,6 +369,5 @@ if __name__ == "__main__":
 
     # 运行主函数
     asyncio.run(main())
-
 
 
