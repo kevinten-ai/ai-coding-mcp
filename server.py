@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import asyncio
 import sys
 from mcp.server.fastmcp import FastMCP
 from config import config
@@ -132,12 +131,10 @@ async def tool_validate_structure(project_path: str, template: str = None) -> di
     """Validate project structure."""
     return await validate_structure(project_path, template)
 
-async def main():
-    print(f"AI Coding MCP v2 starting...")
-    print(f"Server: {config.server.host}:{config.server.port}")
-    await mcp.run()
+def main():
+    print("AI Coding MCP v2 starting...", file=sys.stderr)
+    print(f"Server: {config.server.host}:{config.server.port}", file=sys.stderr)
+    mcp.run()
 
 if __name__ == "__main__":
-    if sys.platform == "win32":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(main())
+    main()
