@@ -1,11 +1,16 @@
 # MCP framework
-mcp>=1.0.0
+mcp>=1.23.0,<2
 
 # Config and data validation
 pydantic>=2.0.0
 
 # YAML support
 pyyaml>=6.0
+
+# Security floors for transitive MCP/HTTP dependencies
+idna>=3.15
+pygments>=2.20.0
+python-multipart>=0.0.31
 
 # Testing
 pytest>=7.0.0
