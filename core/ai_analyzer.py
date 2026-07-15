@@ -3,8 +3,7 @@ AI分析器
 集成大语言模型进行智能分析和报告生成
 """
 
-import json
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from enum import Enum
 import time

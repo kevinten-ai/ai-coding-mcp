@@ -9,7 +9,6 @@ from pathlib import Path
 from dataclasses import dataclass
 from enum import Enum
 
-from ..config import config
 
 
 class PromptType(Enum):

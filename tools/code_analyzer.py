@@ -5,14 +5,12 @@
 
 import ast
 import re
-from typing import Dict, List, Optional, Any, Set
-from collections import defaultdict, Counter
-import math
+from typing import Dict, List, Any
+from collections import Counter
 
-from .base_tool import BaseTool, ToolExecutionResult, ToolExecutionContext
+from .base_tool import BaseTool, ToolExecutionContext
 from ..core.ai_analyzer import AIAnalyzer
 from ..core.data_storage import DataStorage
-from ..config import config
 
 
 class CodeMetrics:

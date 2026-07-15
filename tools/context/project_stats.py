@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from collections import defaultdict
 from typing import Optional
@@ -20,7 +19,7 @@ def _count_lines(file_path: str) -> int:
     try:
         with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
             return len(f.readlines())
-    except:
+    except OSError:
         return 0
 
 async def get_project_stats(root_path: str) -> dict:

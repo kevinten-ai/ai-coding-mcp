@@ -6,7 +6,7 @@
 import os
 import re
 from pathlib import Path
-from typing import Optional, List, Set
+from typing import Optional
 from urllib.parse import urlparse
 
 from ..config import config
@@ -187,7 +187,7 @@ class SecurityValidator:
         try:
             # 解析绝对路径并检查
             resolved = path.resolve()
-            return resolved.exists() or not ".." in str(path)
+            return resolved.exists() or ".." not in str(path)
         except (OSError, ValueError):
             return False
 
@@ -203,8 +203,6 @@ class SecurityValidator:
         """
         if not self.allowed_paths:
             return True  # 如果没有设置允许路径，则允许所有
-
-        path_str = str(path)
 
         for allowed_path in self.allowed_paths:
             allowed = Path(allowed_path)
@@ -277,6 +275,4 @@ rate_limiter = RateLimiter(
     requests_per_minute=config.security.rate_limit_requests,
     burst_limit=config.security.rate_limit_burst
 )
-
-
 

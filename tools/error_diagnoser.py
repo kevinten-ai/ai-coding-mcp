@@ -4,13 +4,11 @@
 """
 
 import re
-import traceback
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 
-from .base_tool import BaseTool, ToolExecutionResult, ToolExecutionContext
+from .base_tool import BaseTool, ToolExecutionContext
 from ..core.ai_analyzer import AIAnalyzer
-from ..config import config
 
 
 @dataclass

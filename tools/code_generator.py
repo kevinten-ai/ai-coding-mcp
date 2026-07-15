@@ -4,13 +4,11 @@
 """
 
 import re
-from typing import Dict, List, Optional, Any, Tuple
-from pathlib import Path
+from typing import Dict, List, Any
 
-from .base_tool import BaseTool, ToolExecutionResult, ToolExecutionContext
+from .base_tool import BaseTool, ToolExecutionContext
 from ..core.ai_analyzer import AIAnalyzer
 from ..core.prompt_manager import PromptManager
-from ..config import config
 
 
 class CodeTemplate:

@@ -6,7 +6,7 @@ MCP工具抽象基类
 import asyncio
 import time
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional, TypeVar, Generic, Union
+from typing import Any, Dict, Optional, TypeVar, Generic
 from dataclasses import dataclass, field
 from enum import Enum
 

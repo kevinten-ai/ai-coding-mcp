@@ -1,5 +1,5 @@
 import pytest
-from utils.cli_runner import run_cli, CLIResult
+from utils.cli_runner import run_cli
 
 @pytest.mark.asyncio
 async def test_run_cli_success():

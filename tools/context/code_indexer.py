@@ -1,7 +1,6 @@
 import ast
 import time
 from pathlib import Path
-from typing import Optional
 from config import config
 from utils.cache import FileCache
 

@@ -4,11 +4,10 @@
 """
 
 import logging
-from typing import Dict, Any, Optional, Union, List
+from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
 from enum import Enum
 
-from ..config import config
 
 
 class ErrorSeverity(Enum):
@@ -319,7 +318,6 @@ class ErrorHandler:
         Returns:
             str: 错误代码
         """
-        error_type = type(error).__name__
         error_message = str(error).lower()
 
         # 网络相关错误
@@ -404,6 +402,5 @@ class ErrorHandler:
 
 # 全局错误处理器实例
 error_handler = ErrorHandler()
-
 
 

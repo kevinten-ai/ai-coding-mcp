@@ -1,4 +1,5 @@
-from typing import List, Optional
+from typing import List
+from pathlib import Path
 from pydantic import BaseModel, Field
 
 class ServerConfig(BaseModel):
@@ -11,10 +12,18 @@ class SecurityConfig(BaseModel):
     max_file_size: int = Field(default=50*1024*1024)
 
     def validate_path(self, path: str) -> bool:
-        # Basic path traversal check
-        import os
-        resolved = os.path.realpath(path)
-        return True  # Simplified for now
+        try:
+            resolved = Path(path).expanduser().resolve()
+            for allowed_path in self.allowed_paths:
+                allowed = Path(allowed_path).expanduser().resolve()
+                try:
+                    resolved.relative_to(allowed)
+                    return True
+                except ValueError:
+                    continue
+        except (OSError, RuntimeError, ValueError):
+            return False
+        return False
 
 class LoggingConfig(BaseModel):
     level: str = Field(default="INFO")

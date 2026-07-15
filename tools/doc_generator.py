@@ -3,11 +3,10 @@
 自动生成代码文档
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, Any
 
-from .base_tool import BaseTool, ToolExecutionResult, ToolExecutionContext
+from .base_tool import BaseTool, ToolExecutionContext
 from ..core.ai_analyzer import AIAnalyzer
-from ..config import config
 
 
 class DocGenerator(BaseTool):

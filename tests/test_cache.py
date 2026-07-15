@@ -1,4 +1,3 @@
-import pytest
 import tempfile
 from utils.cache import FileCache
 

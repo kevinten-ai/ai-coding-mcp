@@ -12,7 +12,6 @@ import sys
 from typing import Dict, Any, Optional
 import argparse
 
-from mcp import Tool
 from mcp.server.fastmcp import FastMCP
 
 from .config import config, load_config_from_file

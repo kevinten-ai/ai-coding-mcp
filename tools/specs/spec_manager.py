@@ -1,7 +1,22 @@
-import os
 import datetime
+import re
 from pathlib import Path
-from typing import Optional
+
+
+def _is_safe_name(name: object) -> bool:
+    return isinstance(name, str) and re.fullmatch(r"[\w-]+", name) is not None
+
+
+def _resolve_spec_path(project_path: str, spec_path: str) -> Path | None:
+    project_root = Path(project_path).expanduser().resolve()
+    docs_root = (project_root / "docs").resolve()
+    full_path = (project_root / spec_path).resolve()
+    try:
+        docs_root.relative_to(project_root)
+        full_path.relative_to(docs_root)
+    except ValueError:
+        return None
+    return full_path
 
 def _parse_frontmatter(content: str) -> tuple:
     frontmatter = {}
@@ -25,7 +40,16 @@ def _get_summary(content: str, max_length: int = 100) -> str:
 
 async def list_specs(project_path: str, spec_type: str = None) -> dict:
     try:
-        docs_path = Path(project_path) / "docs"
+        project_root = Path(project_path).expanduser().resolve()
+        docs_path = _resolve_spec_path(project_path, "docs")
+        if docs_path is None:
+            return {
+                "success": False,
+                "error": {
+                    "code": "INVALID_PATH",
+                    "message": "Specs directory must stay within the project",
+                },
+            }
         specs = []
         for subdir in ["specs", "adr", "guides", "api"]:
             dir_path = docs_path / subdir
@@ -37,7 +61,7 @@ async def list_specs(project_path: str, spec_type: str = None) -> dict:
                         frontmatter, body = _parse_frontmatter(content)
                         spec_info = {
                             "type": frontmatter.get("type", subdir),
-                            "path": str(md_file.relative_to(project_path)),
+                            "path": str(md_file.relative_to(project_root)),
                             "filename": md_file.name,
                             "summary": _get_summary(body),
                             "updated_at": frontmatter.get("date", ""),
@@ -53,7 +77,15 @@ async def list_specs(project_path: str, spec_type: str = None) -> dict:
 
 async def get_spec(project_path: str, spec_path: str) -> dict:
     try:
-        full_path = Path(project_path) / spec_path
+        full_path = _resolve_spec_path(project_path, spec_path)
+        if full_path is None:
+            return {
+                "success": False,
+                "error": {
+                    "code": "INVALID_PATH",
+                    "message": "Spec path must stay within the project docs directory",
+                },
+            }
         if not full_path.exists():
             return {"success": False, "error": {"code": "FILE_NOT_FOUND", "message": f"Spec not found: {spec_path}"}}
         with open(full_path, 'r', encoding='utf-8') as f:
@@ -89,8 +121,14 @@ async def create_spec(project_path: str, spec_type: str, name: str) -> dict:
         type_dir = {"spec": "specs", "adr": "adr", "guide": "guides", "api": "api"}
         if spec_type not in type_dir:
             return {"success": False, "error": {"code": "INVALID_TYPE", "message": f"Unknown spec type: {spec_type}"}}
-        dir_path = Path(project_path) / "docs" / type_dir[spec_type]
-        dir_path.mkdir(parents=True, exist_ok=True)
+        if not _is_safe_name(name):
+            return {
+                "success": False,
+                "error": {
+                    "code": "INVALID_NAME",
+                    "message": f"Invalid spec name: {name}",
+                },
+            }
         today = datetime.date.today()
         if spec_type == "spec":
             filename = f"{today.strftime('%Y-%m-%d')}-{name}.md"
@@ -98,7 +136,17 @@ async def create_spec(project_path: str, spec_type: str, name: str) -> dict:
             filename = f"ADR-001-{name}.md"
         else:
             filename = f"{name}.md"
-        file_path = dir_path / filename
+        relative_path = str(Path("docs") / type_dir[spec_type] / filename)
+        file_path = _resolve_spec_path(project_path, relative_path)
+        if file_path is None:
+            return {
+                "success": False,
+                "error": {
+                    "code": "INVALID_PATH",
+                    "message": "Spec output path must stay within the project docs directory",
+                },
+            }
+        file_path.parent.mkdir(parents=True, exist_ok=True)
         template = f"""---
 type: {spec_type}
 date: {today.strftime('%Y-%m-%d')}
@@ -122,6 +170,7 @@ status: draft
 """
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(template)
-        return {"success": True, "data": {"path": str(file_path.relative_to(project_path))}}
+        project_root = Path(project_path).expanduser().resolve()
+        return {"success": True, "data": {"path": str(file_path.relative_to(project_root))}}
     except Exception as e:
         return {"success": False, "error": {"code": "UNKNOWN", "message": str(e)}}

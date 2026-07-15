@@ -1,4 +1,4 @@
-import os
+import re
 from pathlib import Path
 
 TEMPLATES = {
@@ -36,23 +36,41 @@ TEMPLATES = {
     }
 }
 
+
+def _is_safe_name(name: object) -> bool:
+    return isinstance(name, str) and re.fullmatch(r"[\w-]+", name) is not None
+
+
+def _path_within(root: Path, relative_path: str) -> Path:
+    path = (root / relative_path).resolve()
+    path.relative_to(root)
+    return path
+
 async def scaffold_project(template: str, target_path: str, params: dict) -> dict:
     try:
         if template not in TEMPLATES:
             return {"success": False, "error": {"code": "UNKNOWN_TEMPLATE", "message": f"Unknown template: {template}"}}
         if "name" not in params:
             return {"success": False, "error": {"code": "MISSING_PARAM", "message": "Missing required param: name"}}
+        if not _is_safe_name(params["name"]):
+            return {
+                "success": False,
+                "error": {
+                    "code": "INVALID_PARAM",
+                    "message": f"Invalid project name: {params['name']}",
+                },
+            }
         tmpl = TEMPLATES[template]
-        target = Path(target_path)
+        target = Path(target_path).expanduser().resolve()
         target.mkdir(parents=True, exist_ok=True)
         created = []
         for item in tmpl["structure"]:
-            path = target / item.replace("{{ name }}", params["name"])
+            path = _path_within(target, item.replace("{{ name }}", params["name"]))
             if "." not in path.name:
                 path.mkdir(parents=True, exist_ok=True)
                 created.append(str(path))
         for file_path, content in tmpl["files"].items():
-            full_path = target / file_path.replace("{{ name }}", params["name"])
+            full_path = _path_within(target, file_path.replace("{{ name }}", params["name"]))
             full_path.parent.mkdir(parents=True, exist_ok=True)
             final_content = content
             for key, value in params.items():

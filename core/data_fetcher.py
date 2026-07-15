@@ -6,9 +6,9 @@
 import asyncio
 import aiohttp
 import json
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin
 import time
 
 from ..config import config

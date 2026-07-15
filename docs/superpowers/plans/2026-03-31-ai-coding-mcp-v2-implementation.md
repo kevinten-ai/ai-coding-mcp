@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3.9+, FastMCP, Pydantic, tree-sitter, subprocess, pytest.
 
-**Spec Reference:** `/Users/kevinten/projects/mcp/ai-coding-mcp/docs/superpowers/specs/2026-03-31-ai-coding-mcp-v2-design.md`
+**Spec Reference:** `/path/to/ai-coding-mcp/docs/superpowers/specs/2026-03-31-ai-coding-mcp-v2-design.md`
 
 ---
 
@@ -17,8 +17,8 @@
 ### Task 1.1: Create v2 Config
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/config.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_config.py`
+- Create: `/path/to/ai-coding-mcp/config.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_config.py`
 
 - [ ] **Step 1: Write failing test for config**
 
@@ -98,8 +98,8 @@ git commit -m "feat: add v2 config with Server/Security/Logging/Cache configs"
 ### Task 1.2: Create CLI Runner
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/utils/cli_runner.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_cli_runner.py`
+- Create: `/path/to/ai-coding-mcp/utils/cli_runner.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_cli_runner.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -224,8 +224,8 @@ git commit -m "feat: add cli_runner with timeout and error handling"
 ### Task 1.3: Create Cache Module
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/utils/cache.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_cache.py`
+- Create: `/path/to/ai-coding-mcp/utils/cache.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_cache.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -336,7 +336,7 @@ git commit -m "feat: add file-based cache with TTL support"
 ### Task 1.4: Create Server Skeleton
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/server.py`
+- Create: `/path/to/ai-coding-mcp/server.py`
 
 - [ ] **Step 1: Implement minimal server**
 
@@ -413,8 +413,8 @@ git commit -m "feat: add server skeleton with FastMCP and health_check tool"
 ### Task 2.1: Create Code Indexer
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/context/code_indexer.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_code_indexer.py`
+- Create: `/path/to/ai-coding-mcp/tools/context/code_indexer.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_code_indexer.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -620,8 +620,8 @@ git commit -m "feat: add code_indexer with Python AST support and caching"
 ### Task 2.2: Create Dependency Graph
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/context/dependency_graph.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_dependency_graph.py`
+- Create: `/path/to/ai-coding-mcp/tools/context/dependency_graph.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_dependency_graph.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -763,8 +763,8 @@ git commit -m "feat: add dependency_graph with import classification"
 ### Task 2.3: Create Project Stats
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/context/project_stats.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_project_stats.py`
+- Create: `/path/to/ai-coding-mcp/tools/context/project_stats.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_project_stats.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -907,7 +907,7 @@ git commit -m "feat: add project_stats with multi-language line counting"
 ### Task 2.4: Register Context Tools
 
 **Files:**
-- Modify: `/Users/kevinten/projects/mcp/ai-coding-mcp/server.py`
+- Modify: `/path/to/ai-coding-mcp/server.py`
 
 - [ ] **Step 1: Import and register context tools**
 
@@ -957,8 +957,8 @@ git commit -m "feat: register context module tools (4 tools)"
 ### Task 3.1: Create Package Info
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/knowledge/package_info.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_package_info.py`
+- Create: `/path/to/ai-coding-mcp/tools/knowledge/package_info.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_package_info.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -1099,8 +1099,8 @@ git commit -m "feat: add package_info with PyPI and npm support"
 ### Task 3.2: Create Compatibility Check
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/knowledge/compatibility.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_compatibility.py`
+- Create: `/path/to/ai-coding-mcp/tools/knowledge/compatibility.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_compatibility.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -1223,8 +1223,8 @@ git commit -m "feat: add compatibility check for Python dependencies"
 ### Task 3.3: Create Doc Search (Stub)
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/knowledge/doc_search.py`
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/knowledge/code_search.py`
+- Create: `/path/to/ai-coding-mcp/tools/knowledge/doc_search.py`
+- Create: `/path/to/ai-coding-mcp/tools/knowledge/code_search.py`
 
 - [ ] **Step 1: Implement doc search stub**
 
@@ -1298,8 +1298,8 @@ git commit -m "feat: add knowledge module with 4 tools (2 stubs)"
 ### Task 4.1: Create Git Operations
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/workflow/git_ops.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_git_ops.py`
+- Create: `/path/to/ai-coding-mcp/tools/workflow/git_ops.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_git_ops.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -1490,7 +1490,7 @@ git commit -m "feat: add git_ops with status and history"
 ### Task 4.2: Create GitHub CI Operations
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/workflow/ci_github.py`
+- Create: `/path/to/ai-coding-mcp/tools/workflow/ci_github.py`
 
 - [ ] **Step 1: Implement CI/GitHub tools (stubs)**
 
@@ -1576,8 +1576,8 @@ git commit -m "feat: add workflow module with 6 tools (4 stubs)"
 ### Task 5.1: Create Spec Manager
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/specs/spec_manager.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_spec_manager.py`
+- Create: `/path/to/ai-coding-mcp/tools/specs/spec_manager.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_spec_manager.py`
 
 - [ ] **Step 1: Write failing test**
 
@@ -1887,9 +1887,9 @@ git commit -m "feat: add spec_manager with list/get/search/create"
 ### Task 5.2: Create Scaffold and Validator
 
 **Files:**
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/specs/scaffold.py`
-- Create: `/Users/kevinten/projects/mcp/ai-coding-mcp/tools/specs/validator.py`
-- Test: `/Users/kevinten/projects/mcp/ai-coding-mcp/tests/test_scaffold.py`
+- Create: `/path/to/ai-coding-mcp/tools/specs/scaffold.py`
+- Create: `/path/to/ai-coding-mcp/tools/specs/validator.py`
+- Test: `/path/to/ai-coding-mcp/tests/test_scaffold.py`
 
 - [ ] **Step 1: Write failing test for scaffold**
 
@@ -2059,7 +2059,7 @@ git commit -m "feat: add scaffold with python/node/generic templates"
 ### Task 5.3: Register Specs Tools
 
 **Files:**
-- Modify: `/Users/kevinten/projects/mcp/ai-coding-mcp/server.py`
+- Modify: `/path/to/ai-coding-mcp/server.py`
 
 - [ ] **Step 1: Import and register specs tools**
 
@@ -2114,7 +2114,7 @@ git commit -m "feat: register specs module tools (6 tools)"
 ### Task 6.1: Update Requirements
 
 **Files:**
-- Modify: `/Users/kevinten/projects/mcp/ai-coding-mcp/requirements.txt`
+- Modify: `/path/to/ai-coding-mcp/requirements.txt`
 
 - [ ] **Step 1: Update requirements for v2**
 
@@ -2145,7 +2145,7 @@ git commit -m "chore: update requirements for v2"
 ### Task 6.2: Create Comprehensive README
 
 **Files:**
-- Modify: `/Users/kevinten/projects/mcp/ai-coding-mcp/README.md`
+- Modify: `/path/to/ai-coding-mcp/README.md`
 
 - [ ] **Step 1: Write v2 README**
 

@@ -1,6 +1,5 @@
 import ast
 from pathlib import Path
-from typing import Optional
 
 def _extract_python_imports(file_path: str) -> dict:
     imports = {"stdlib": [], "third_party": [], "internal": []}
